@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Editar Actividad</title>
+</head>
+<body>
+
+<big><b>EDITAR ACTIVIDAD</b></big>
+<br>
+<br>
+
+<table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td><b>NOMBRE</b></td>
+      <td><input size="60" value="Armar los stands en el gimnasio" type="text"></td>
+    </tr>
+
+    <tr>
+      <td><b>DESCRIPCI&Oacute;N</b></td>
+      <td><textarea rows="3" cols="50">Montaje de mesas y carteles</textarea></td>
+    </tr>
+
+    <tr>
+      <td><b>Seleccione Objetivo Espec&iacute;fico</b></td>
+      <td>
+      <select>
+      <option selected="selected">MATERIALES</option>
+      <option>EXPOSICION</option>
+      </select>
+      </td>
+    </tr>
+
+    <tr>
+      <td><b>Fecha-Hora Inicio</b></td>
+      <td><input value="2026-10-14T09:00" type="datetime-local"></td>
+    </tr>
+
+    <tr>
+      <td><b>Fecha-Hora Termino</b></td>
+      <td><input value="2026-10-14T13:00" type="datetime-local"></td>
+    </tr>
+
+    <tr>
+      <td><b>PAO</b></td>
+      <td><input checked="checked" type="checkbox"></td>
+    </tr>
+
+    <tr>
+      <td><b>Observaci&oacute;n Control Gesti&oacute;n</b></td>
+      <td><textarea rows="3" cols="50">Sin observaciones</textarea></td>
+    </tr>
+
+    <tr>
+      <td><b>Seleccione Responsable de Actividad</b></td>
+      <td>
+      <select>
+      <option selected="selected">Prof. Carla Reyes</option>
+      <option>Prof. Mar&iacute;a Gonz&aacute;lez</option>
+      <option>Prof. Pedro Soto</option>
+      </select>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+<br>
+
+<input value="Guardar" onclick="parent.postMessage('cerrar','*')" type="button">
+<input value="Cancelar" onclick="parent.postMessage('cerrar','*')" type="button">
+</body>
+</html>
