@@ -4,3 +4,4 @@ dao\UsuarioDAOImpl.class
 conexion\Conexion.class
 controlador\Controlador.class
 modelo\Usuario.class
+controlador\LoginServlet.class
