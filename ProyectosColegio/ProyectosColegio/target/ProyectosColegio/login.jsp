@@ -84,10 +84,9 @@
 <body>
 
     <div class="main-container">
-        <!-- Lado izquierdo con la imagen -->
+        <!-- Lado izquierdo con la imagen campus.png -->
         <div class="left-image">
-            <!-- Cambia 'universidad.jpg' por el nombre exacto de tu archivo si es diferente -->
-            <img src="img/universidad.jpg" alt="Universidad">
+            <img src="img/campus.png" alt="Campus">
         </div>
 
         <!-- Lado derecho con el formulario -->

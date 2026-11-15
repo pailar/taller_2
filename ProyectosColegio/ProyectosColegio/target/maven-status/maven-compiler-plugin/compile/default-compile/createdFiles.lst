@@ -1,3 +1,7 @@
+modelo\Actividad.class
+modelo\Objetivo.class
+modelo\Proyectos.class
+modelo\Lineas.class
 factoria\DAOFactory.class
 dao\UsuarioDAO.class
 dao\UsuarioDAOImpl.class
