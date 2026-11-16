@@ -3,7 +3,6 @@ package controlador;
 import dao.ProyectosDAO;
 import modelo.Proyectos;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +18,7 @@ public class ControladorProyecto extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String accion = request.getParameter("accion");
-        
+
         if (accion == null) {
             accion = "listar";
         }
@@ -30,33 +29,42 @@ public class ControladorProyecto extends HttpServlet {
                 request.setAttribute("proyectos", lista);
                 request.getRequestDispatcher("proyectos.jsp").forward(request, response);
                 break;
-                
+
             case "guardar":
                 String nombre = request.getParameter("txtNombre");
-                String descripcion = request.getParameter("txtDescripcion");
-                String fInicio = request.getParameter("txtFechaInicio");
-                String fTermino = request.getParameter("txtFechaTermino");
+                int idFuncionario = Integer.parseInt(request.getParameter("txtIdFuncionario"));
 
                 Proyectos p = new Proyectos();
                 p.setNombre(nombre);
-                p.setDescripcion(descripcion);
-                if (fInicio != null && !fInicio.isEmpty()) {
-                    p.setFechainicio(LocalDate.parse(fInicio));
-                }
-                if (fTermino != null && !fTermino.isEmpty()) {
-                    p.setFechatermino(LocalDate.parse(fTermino));
-                }
+                p.setIdFuncionarioResponsable(idFuncionario);
 
                 dao.guardar(p);
                 response.sendRedirect("ControladorProyecto?accion=listar");
                 break;
-                
+
+            case "editar":
+                int idEditar = Integer.parseInt(request.getParameter("id"));
+                Proyectos proyectoEditar = dao.obtenerPorId(idEditar);
+                request.setAttribute("proyectoEditar", proyectoEditar);
+                request.getRequestDispatcher("proyectos.jsp").forward(request, response);
+                break;
+
+            case "actualizar":
+                int idAct = Integer.parseInt(request.getParameter("txtId"));
+                String nombreAct = request.getParameter("txtNombre");
+                int idFuncAct = Integer.parseInt(request.getParameter("txtIdFuncionario"));
+
+                Proyectos pAct = new Proyectos(idAct, nombreAct, idFuncAct);
+                dao.actualizar(pAct);
+                response.sendRedirect("ControladorProyecto?accion=listar");
+                break;
+
             case "eliminar":
                 int id = Integer.parseInt(request.getParameter("id"));
                 dao.eliminar(id);
                 response.sendRedirect("ControladorProyecto?accion=listar");
                 break;
-                
+
             default:
                 response.sendRedirect("menu.jsp");
                 break;

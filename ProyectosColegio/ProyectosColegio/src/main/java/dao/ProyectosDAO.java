@@ -3,7 +3,6 @@ package dao;
 import conexion.Conexion;
 import modelo.Proyectos;
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +10,7 @@ public class ProyectosDAO {
 
     public List<Proyectos> listar() {
         List<Proyectos> lista = new ArrayList<>();
-        String sql = "SELECT id, nombre, descripcion, fecha_inicio, fecha_termino FROM proyecto";
+        String sql = "SELECT id, nombre, id_funcionario_responsable FROM proyecto";
         try (Connection con = Conexion.getConexion();
              PreparedStatement ps = con.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
@@ -19,19 +18,7 @@ public class ProyectosDAO {
                 Proyectos p = new Proyectos();
                 p.setId(rs.getInt("id"));
                 p.setNombre(rs.getString("nombre"));
-                p.setDescripcion(rs.getString("descripcion"));
-                
-                // Manejo seguro de fechas por si vienen nulas en la BD
-                Date fInicio = rs.getDate("fecha_inicio");
-                if (fInicio != null) {
-                    p.setFechainicio(fInicio.toLocalDate());
-                }
-                
-                Date fTermino = rs.getDate("fecha_termino");
-                if (fTermino != null) {
-                    p.setFechatermino(fTermino.toLocalDate());
-                }
-                
+                p.setIdFuncionarioResponsable(rs.getInt("id_funcionario_responsable"));
                 lista.add(p);
             }
         } catch (SQLException e) {
@@ -41,17 +28,50 @@ public class ProyectosDAO {
     }
 
     public boolean guardar(Proyectos p) {
-        String sql = "INSERT INTO proyecto (nombre, descripcion, fecha_inicio, fecha_termino) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO proyecto (nombre, id_funcionario_responsable) VALUES (?, ?)";
         try (Connection con = Conexion.getConexion();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, p.getNombre());
-            ps.setString(2, p.getDescripcion());
-            ps.setObject(3, p.getFechainicio());
-            ps.setObject(4, p.getFechatermino());
+            ps.setInt(2, p.getIdFuncionarioResponsable());
             ps.executeUpdate();
             return true;
         } catch (SQLException e) {
             System.out.println("Error al guardar proyecto: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public Proyectos obtenerPorId(int id) {
+        String sql = "SELECT id, nombre, id_funcionario_responsable FROM proyecto WHERE id = ?";
+        try (Connection con = Conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return new Proyectos(
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getInt("id_funcionario_responsable")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al buscar proyecto: " + e.getMessage());
+        }
+        return null;
+    }
+
+    public boolean actualizar(Proyectos p) {
+        String sql = "UPDATE proyecto SET nombre = ?, id_funcionario_responsable = ? WHERE id = ?";
+        try (Connection con = Conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, p.getNombre());
+            ps.setInt(2, p.getIdFuncionarioResponsable());
+            ps.setInt(3, p.getId());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar proyecto: " + e.getMessage());
             return false;
         }
     }

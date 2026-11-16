@@ -1,31 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
 
-import java.time.LocalDate;
-
-/**
- *
- * @author danae
- */
 public class Proyectos {
     private int id;
     private String nombre;
-    private String descripcion;
-    private LocalDate fechainicio;
-    private LocalDate fechatermino;
+    private int idFuncionarioResponsable;
 
     public Proyectos() {
     }
 
-    public Proyectos(int id, String nombre, String descripcion, LocalDate fechainicio, LocalDate fechatermino) {
+    public Proyectos(int id, String nombre, int idFuncionarioResponsable) {
         this.id = id;
         this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.fechainicio = fechainicio;
-        this.fechatermino = fechatermino;
+        this.idFuncionarioResponsable = idFuncionarioResponsable;
     }
 
     public int getId() {
@@ -44,35 +30,16 @@ public class Proyectos {
         this.nombre = nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public int getIdFuncionarioResponsable() {
+        return idFuncionarioResponsable;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public LocalDate getFechainicio() {
-        return fechainicio;
-    }
-
-    public void setFechainicio(LocalDate fechainicio) {
-        this.fechainicio = fechainicio;
-    }
-
-    public LocalDate getFechatermino() {
-        return fechatermino;
-    }
-
-    public void setFechatermino(LocalDate fechatermino) {
-        this.fechatermino = fechatermino;
+    public void setIdFuncionarioResponsable(int idFuncionarioResponsable) {
+        this.idFuncionarioResponsable = idFuncionarioResponsable;
     }
 
     @Override
     public String toString() {
-        return "Proyectos{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", fechainicio=" + fechainicio + ", fechatermino=" + fechatermino + '}';
+        return "Proyectos{" + "id=" + id + ", nombre=" + nombre + ", idFuncionarioResponsable=" + idFuncionarioResponsable + '}';
     }
-    
-    
-   
 }

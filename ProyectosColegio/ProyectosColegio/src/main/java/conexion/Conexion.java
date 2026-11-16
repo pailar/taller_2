@@ -7,10 +7,10 @@ import java.sql.SQLException;
 public class Conexion {
 
     private static final String DRIVER  = "com.mysql.cj.jdbc.Driver";
-    private static final String URL     = "jdbc:mysql://localhost:3306/taller_proyectos"
+    private static final String URL     = "jdbc:mysql://localhost:3306/proyectos"
             + "?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
-    private static final String USUARIO = "root";      // <-cambiar por usiario sql
-    private static final String CLAVE   = "root";      // <-cambiar para clave para sqlo
+    private static final String USUARIO = "root";
+    private static final String CLAVE   = "1234"; 
 
     private Conexion() {
     }
