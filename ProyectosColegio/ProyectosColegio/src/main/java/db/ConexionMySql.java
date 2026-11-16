@@ -8,10 +8,10 @@ public final class ConexionMySql extends ConexionGenericaDB
     public ConexionMySql() throws java.lang.ClassNotFoundException, java.lang.InstantiationException, java.lang.IllegalAccessException, java.sql.SQLException, java.lang.Exception
     {
         this("jdbc://mysql",
-                "com.mysql.cj.jbdc",
+                "com.mysql.cj.jdbc.Driver",
                 "localhost",
                 ":3306",
-                "pi",
+                "proyecto",
                 "?charSet=LATIN1",
                 "root",
                 "1234");

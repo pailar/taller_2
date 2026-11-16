@@ -9,7 +9,8 @@
     <h1>¡Bienvenido!</h1>
     <p>Selecciona una opción para continuar:</p>
     
-    <form action="proyectos.jsp" method="get">
+    
+    <form action="ControladorProyecto" method="get">
         <button type="submit">Ir a Proyectos</button>
     </form>
     
