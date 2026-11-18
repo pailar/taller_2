@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
-<%@page import="modelo.Proyectos"%>
+<%@page import="modelo.Proyecto"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +12,7 @@
     <h1>Proyectos</h1>
 
     <%
-        Proyectos proyectoEditar = (Proyectos) request.getAttribute("proyectoEditar");
+        Proyecto proyectoEditar = (Proyecto) request.getAttribute("proyectoEditar");
         boolean editando = (proyectoEditar != null);
     %>
 
@@ -31,8 +31,6 @@
         <div>
             <label>Funcionario Responsable:</label>
             <select name="txtIdFuncionario" required>
-                <option value="1" <%= (editando && proyectoEditar.getIdFuncionarioResponsable() == 1) ? "selected" : "" %>>1 - Camila Soto</option>
-                <option value="2" <%= (editando && proyectoEditar.getIdFuncionarioResponsable() == 2) ? "selected" : "" %>>2 - Jorge Muñoz</option>
             </select>
         </div>
 
@@ -56,14 +54,14 @@
         </thead>
         <tbody>
             <%
-                List<Proyectos> lista = (List<Proyectos>) request.getAttribute("proyectos");
+                List<Proyecto> lista = (List<Proyecto>) request.getAttribute("proyectos");
                 if (lista != null) {
-                    for (Proyectos p : lista) {
+                    for (Proyecto p : lista) {
             %>
                 <tr>
                     <td><%= p.getId() %></td>
                     <td><%= p.getNombre() %></td>
-                    <td><%= p.getIdFuncionarioResponsable() %></td>
+                    <td><%= p.getFuncionario().getNombre() %></td>
                     <td>
                         <a href="ControladorProyecto?accion=editar&id=<%= p.getId() %>">Editar</a> | 
                         <a href="ControladorProyecto?accion=eliminar&id=<%= p.getId() %>" onclick="return confirm('¿Eliminar este proyecto?');">Eliminar</a>

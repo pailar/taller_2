@@ -1,7 +1,6 @@
 package controlador;
 
 import dao.ProyectosDAO;
-import modelo.Proyectos;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -9,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Proyecto;
 
 @WebServlet(name = "ControladorProyecto", urlPatterns = {"/ControladorProyecto"})
 public class ControladorProyecto extends HttpServlet {
@@ -25,7 +25,7 @@ public class ControladorProyecto extends HttpServlet {
 
         switch (accion) {
             case "listar":
-                List<Proyectos> lista = dao.listar();
+                List<Proyecto> lista = dao.listar();
                 request.setAttribute("proyectos", lista);
                 request.getRequestDispatcher("proyectos.jsp").forward(request, response);
                 break;
@@ -34,9 +34,9 @@ public class ControladorProyecto extends HttpServlet {
                 String nombre = request.getParameter("txtNombre");
                 int idFuncionario = Integer.parseInt(request.getParameter("txtIdFuncionario"));
 
-                Proyectos p = new Proyectos();
+                Proyecto p = new Proyecto();
                 p.setNombre(nombre);
-                p.setIdFuncionarioResponsable(idFuncionario);
+                //p.setIdFuncionarioResponsable(idFuncionario);
 
                 dao.guardar(p);
                 response.sendRedirect("ControladorProyecto?accion=listar");
@@ -44,7 +44,7 @@ public class ControladorProyecto extends HttpServlet {
 
             case "editar":
                 int idEditar = Integer.parseInt(request.getParameter("id"));
-                Proyectos proyectoEditar = dao.obtenerPorId(idEditar);
+                Proyecto proyectoEditar = dao.obtenerPorId(idEditar);
                 request.setAttribute("proyectoEditar", proyectoEditar);
                 request.getRequestDispatcher("proyectos.jsp").forward(request, response);
                 break;
@@ -54,9 +54,9 @@ public class ControladorProyecto extends HttpServlet {
                 String nombreAct = request.getParameter("txtNombre");
                 int idFuncAct = Integer.parseInt(request.getParameter("txtIdFuncionario"));
 
-                Proyectos pAct = new Proyectos(idAct, nombreAct, idFuncAct);
-                dao.actualizar(pAct);
-                response.sendRedirect("ControladorProyecto?accion=listar");
+                //Proyecto pAct = new Proyecto(idAct, nombreAct, idFuncAct);
+                //dao.actualizar(pAct);
+                //response.sendRedirect("ControladorProyecto?accion=listar");
                 break;
 
             case "eliminar":

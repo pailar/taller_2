@@ -1,0 +1,5 @@
+                <!--
+                <option value="1" <%= //(editando && proyectoEditar.getIdFuncionarioResponsable() == 1) ? "selected" : "" %>>1 - Camila Soto</option>
+                <option value="2" <%= //(editando && proyectoEditar.getIdFuncionarioResponsable() == 2) ? "selected" : "" %>>2 - Jorge Muñoz</option>
+                -->
+

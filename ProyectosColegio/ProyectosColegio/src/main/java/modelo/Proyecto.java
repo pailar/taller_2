@@ -11,10 +11,10 @@ import java.util.ArrayList;
  * @author usuario
  */
 public class Proyecto {
-    int id;
-    String nombre;
-    Funcionario funcionario;
-    ArrayList<Linea> arLineas = new ArrayList();
+    private int id;
+    private String nombre;
+    private Funcionario funcionario = new Funcionario();
+    private ArrayList<Linea> arLineas = new ArrayList();
 
     public int getId() {
         return id;

@@ -45,7 +45,10 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     }
 
     private Usuario leer(ResultSet rs) throws SQLException {
+        /*
         return new Usuario(rs.getInt("id"), rs.getString("nombre"),
                 rs.getString("login"), rs.getString("pass"));
+        */
+        return null;
     }
 }
