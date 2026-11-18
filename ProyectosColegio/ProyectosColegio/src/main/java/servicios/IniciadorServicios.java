@@ -13,7 +13,7 @@ public class IniciadorServicios implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         System.out.println("--- INICIALIZANDO TABLAS DE MASCOTAS ---");
-
+/*
         String[] comandosSQL = {
             "DROP TABLE IF EXISTS MASCOTA",
             "DROP TABLE IF EXISTS ESPECIE",
@@ -48,6 +48,7 @@ public class IniciadorServicios implements ServletContextListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
+*/
     }
 
     @Override

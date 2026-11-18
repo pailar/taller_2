@@ -50,7 +50,7 @@
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
-                <th>ID Funcionario</th>
+                <th>Funcionario</th>
                 <th>Acciones</th>
             </tr>
         </thead>

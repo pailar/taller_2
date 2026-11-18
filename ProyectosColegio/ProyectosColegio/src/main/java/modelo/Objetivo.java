@@ -4,24 +4,16 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+
 /**
  *
- * @author danae
+ * @author usuario
  */
 public class Objetivo {
-    private int id;
-    private String descripcion;
-    private Proyectos proyecto=new Proyectos();
-
-    public Objetivo() {
-    }
-
-    
-    public Objetivo(int id, String descripcion, Proyectos proyecto) {
-        this.id = id;
-        this.descripcion = descripcion;
-        this.proyecto=proyecto;
-    }
+    int id;
+    String nombre;
+    ArrayList<Actividad> arActividades = new ArrayList();
 
     public int getId() {
         return id;
@@ -31,29 +23,27 @@ public class Objetivo {
         this.id = id;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public Proyectos getProyecto() {
-        return proyecto;
+    public ArrayList<Actividad> getArActividades() {
+        return arActividades;
     }
 
-    public void setProyecto(Proyectos proyecto) {
-        this.proyecto = proyecto;
+    public void setArActividades(ArrayList<Actividad> arActividades) {
+        this.arActividades = arActividades;
     }
 
     @Override
     public String toString() {
-        return "Objetivo{" + "id=" + id + ", descripcion=" + descripcion +  ", proyecto=" + proyecto + '}';
+        return "Objetivo{" + "id=" + id + ", nombre=" + nombre + ", arActividades=" + arActividades + '}';
     }
-    
-    
-    
-    
+
+
     
 }

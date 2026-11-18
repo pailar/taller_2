@@ -4,29 +4,17 @@
  */
 package modelo;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  *
- * @author danae
+ * @author usuario
  */
 public class Actividad {
-    private int id;
-    private String descripcion;
-    private String nombre;
-    private LocalDate fecha;
-    private Proyectos proyecto=new Proyectos();
-
-    public Actividad() {
-    }
-
-    public Actividad(int id, String descripcion, String nombre, LocalDate fecha, Proyectos proyecto) {
-        this.id = id;
-        this.descripcion = descripcion;
-        this.nombre = nombre;
-        this.fecha = fecha;
-        this.proyecto=proyecto;
-    }
+    int id;
+    String nombre;
+    LocalDateTime fechaHoraInicio;
+    LocalDateTime fechaHoraTermino;
 
     public int getId() {
         return id;
@@ -34,14 +22,6 @@ public class Actividad {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
     }
 
     public String getNombre() {
@@ -52,24 +32,27 @@ public class Actividad {
         this.nombre = nombre;
     }
 
-    public LocalDate getFecha() {
-        return fecha;
+    public LocalDateTime getFechaHoraInicio() {
+        return fechaHoraInicio;
     }
 
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
+    public void setFechaHoraInicio(LocalDateTime fechaHoraInicio) {
+        this.fechaHoraInicio = fechaHoraInicio;
     }
 
-    public Proyectos getProyecto() {
-        return proyecto;
+    public LocalDateTime getFechaHoraTermino() {
+        return fechaHoraTermino;
     }
 
-    public void setProyecto(Proyectos proyecto) {
-        this.proyecto = proyecto;
+    public void setFechaHoraTermino(LocalDateTime fechaHoraTermino) {
+        this.fechaHoraTermino = fechaHoraTermino;
     }
 
     @Override
     public String toString() {
-        return "Actividad{" + "id=" + id + ", descripcion=" + descripcion + ", nombre=" + nombre + ", fecha=" + fecha + ", proyecto=" + proyecto + '}';
+        return "Actividad{" + "id=" + id + ", nombre=" + nombre + ", fechaHoraInicio=" + fechaHoraInicio + ", fechaHoraTermino=" + fechaHoraTermino + '}';
     }
+    
+    
+    
 }
