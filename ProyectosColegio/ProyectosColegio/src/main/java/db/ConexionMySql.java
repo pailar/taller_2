@@ -11,7 +11,7 @@ public final class ConexionMySql extends ConexionGenericaDB
                 "com.mysql.cj.jdbc.Driver",
                 "localhost",
                 ":3306",
-                "proyecto",
+                "proyectos",
                 "?charSet=LATIN1",
                 "root",
                 "1234");
