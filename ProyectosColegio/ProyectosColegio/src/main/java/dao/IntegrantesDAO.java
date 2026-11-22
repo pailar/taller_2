@@ -8,7 +8,6 @@ import java.util.List;
 
 public class IntegrantesDAO {
 
-    // Integrantes que ya estan en el proyecto
     public List<Funcionario> listar(int idProyecto) {
         String sql = "SELECT f.id, f.rut, f.nombre"
                    + " FROM r_proyecto_funcionario r"
@@ -17,7 +16,6 @@ public class IntegrantesDAO {
         return consultar(sql, idProyecto);
     }
 
-    // Funcionarios que todavia NO son integrantes (para el select de "Agregar")
     public List<Funcionario> listarDisponibles(int idProyecto) {
         String sql = "SELECT id, rut, nombre FROM funcionario"
                    + " WHERE id NOT IN (SELECT id_funcionario FROM r_proyecto_funcionario WHERE id_proyecto = ?)"

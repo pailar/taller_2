@@ -16,7 +16,6 @@ public class LineasDAO {
             + " FROM r_proyecto_linea r"
             + " INNER JOIN linea l ON r.id_linea = l.id";
 
-    // Lineas genericas (para los select)
     public List<Linea> listarGenericas() {
         List<Linea> lista = new ArrayList<>();
         String sql = "SELECT id, nombre FROM linea ORDER BY nombre";
@@ -35,7 +34,6 @@ public class LineasDAO {
         return lista;
     }
 
-    // Lineas detalladas de un proyecto; si buscar trae texto filtra por descripcion
     public List<Linea> listarPorProyecto(int idProyecto, String buscar) {
         List<Linea> lista = new ArrayList<>();
         boolean filtra = (buscar != null && !buscar.trim().isEmpty());
@@ -75,7 +73,6 @@ public class LineasDAO {
         return null;
     }
 
-    // Un proyecto no puede tener la misma linea generica dos veces (UNIQUE en la BD)
     public boolean existe(int idProyecto, int idLinea, int idRelacionExcluida) {
         String sql = "SELECT COUNT(*) FROM r_proyecto_linea WHERE id_proyecto = ? AND id_linea = ? AND id <> ?";
         try (Connection con = Conexion.getConexion();
@@ -120,7 +117,6 @@ public class LineasDAO {
         }
     }
 
-    // Sus objetivos y actividades se borran solos (ON DELETE CASCADE)
     public boolean eliminar(int idRelacion) {
         String sql = "DELETE FROM r_proyecto_linea WHERE id = ?";
         try (Connection con = Conexion.getConexion();

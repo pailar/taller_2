@@ -26,7 +26,6 @@ public class ProyectosDAO {
         return listar(null);
     }
 
-    // Si buscar viene con texto, filtra por nombre del proyecto
     public List<Proyecto> listar(String buscar) {
         List<Proyecto> lista = new ArrayList<>();
         boolean filtra = (buscar != null && !buscar.trim().isEmpty());
@@ -120,7 +119,6 @@ public class ProyectosDAO {
         }
     }
 
-    // Las lineas, objetivos y actividades del proyecto se borran solas (ON DELETE CASCADE)
     public boolean eliminar(int id) {
         String sql = "DELETE FROM proyecto WHERE id = ?";
         try (Connection con = Conexion.getConexion();

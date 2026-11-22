@@ -19,7 +19,6 @@ public class ActividadesDAO {
             + " INNER JOIN r_proyecto_linea r ON o.id_r_proyecto_linea = r.id"
             + " LEFT JOIN funcionario f ON a.id_funcionario_responsable = f.id";
 
-    // Actividades de todos los objetivos del proyecto; si buscar trae texto filtra por nombre
     public List<Actividad> listarPorProyecto(int idProyecto, String buscar) {
         List<Actividad> lista = new ArrayList<>();
         boolean filtra = (buscar != null && !buscar.trim().isEmpty());

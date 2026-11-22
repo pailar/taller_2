@@ -36,7 +36,6 @@ public class ControladorProyecto extends HttpServlet {
         }
 
         switch (accion) {
-            // ---------------- PROYECTOS ----------------
             case "listar":
                 String buscar = request.getParameter("buscar");
                 request.setAttribute("proyectos", dao.listar(buscar));
@@ -126,7 +125,6 @@ public class ControladorProyecto extends HttpServlet {
                 }
                 break;
 
-            // ---------------- INTEGRANTES ----------------
             case "agregarIntegrante":
                 int idProyAgr = entero(request.getParameter("idProyecto"));
                 int idFuncAgr = entero(request.getParameter("idFuncionario"));
@@ -168,7 +166,6 @@ public class ControladorProyecto extends HttpServlet {
                 }
                 break;
 
-            // ---------------- LINEAS DE ACCION ----------------
             case "crearLinea":
                 int idProyCrear = entero(request.getParameter("idProyecto"));
                 int idLineaCrear = entero(request.getParameter("txtIdLinea"));
@@ -242,14 +239,11 @@ public class ControladorProyecto extends HttpServlet {
         }
     }
 
-    // Vuelve a la pantalla de edicion del proyecto (resultado = "&ok=1", "&error=1", etc.)
     private void volverAEditar(HttpServletResponse response, int idProyecto, String resultado)
             throws IOException {
         response.sendRedirect("ControladorProyecto?accion=editar&id=" + idProyecto + resultado);
     }
 
-    // Arma un Proyecto con lo que viene del formulario (agregar y editar usan los mismos campos).
-    // Devuelve null si falta el nombre, el responsable o si una fecha es invalida.
     private Proyecto armarProyecto(HttpServletRequest request) {
         String nombre = request.getParameter("txtNombre");
         int idFuncionario = entero(request.getParameter("txtIdFuncionario"));
@@ -273,7 +267,6 @@ public class ControladorProyecto extends HttpServlet {
         return p;
     }
 
-    // La fecha de termino no puede ser anterior a la de inicio
     private boolean fechasOrdenadas(Proyecto p) {
         if (p.getFechaInicio() == null || p.getFechaTermino() == null) {
             return true;
@@ -281,7 +274,6 @@ public class ControladorProyecto extends HttpServlet {
         return !p.getFechaTermino().isBefore(p.getFechaInicio());
     }
 
-    // Convierte a int; si viene vacio o invalido devuelve -1
     private int entero(String valor) {
         try {
             return Integer.parseInt(valor);
@@ -290,7 +282,6 @@ public class ControladorProyecto extends HttpServlet {
         }
     }
 
-    // El input type="date" envia yyyy-MM-dd; vacio = sin fecha
     private LocalDate fecha(String valor) {
         if (valor == null || valor.trim().isEmpty()) {
             return null;
@@ -298,7 +289,6 @@ public class ControladorProyecto extends HttpServlet {
         return LocalDate.parse(valor.trim());
     }
 
-    // Texto vacio se guarda como null
     private String texto(String valor) {
         if (valor == null || valor.trim().isEmpty()) {
             return null;

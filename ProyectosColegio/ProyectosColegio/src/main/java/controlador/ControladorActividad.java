@@ -98,8 +98,6 @@ public class ControladorActividad extends HttpServlet {
         }
     }
 
-    // Arma una Actividad con lo del formulario (crear y editar usan casi los mismos campos).
-    // Devuelve null si falta algo obligatorio, una fecha es invalida o el % esta fuera de 0-100.
     private Actividad armarActividad(HttpServletRequest request) {
         String nombre = Util.texto(request.getParameter("txtNombre"));
         int idObjetivo = Util.entero(request.getParameter("txtIdObjetivo"));
@@ -127,7 +125,6 @@ public class ControladorActividad extends HttpServlet {
             return null;
         }
 
-        // en "crear" el % no viene y parte en 0
         String paramPorcentaje = request.getParameter("txtPorcentaje");
         int porcentaje = (paramPorcentaje == null) ? 0 : Util.entero(paramPorcentaje);
         if (porcentaje < 0 || porcentaje > 100) {
@@ -137,7 +134,6 @@ public class ControladorActividad extends HttpServlet {
         return a;
     }
 
-    // El termino no puede ser anterior al inicio
     private boolean fechasOrdenadas(Actividad a) {
         return !a.getFechaHoraTermino().isBefore(a.getFechaHoraInicio());
     }

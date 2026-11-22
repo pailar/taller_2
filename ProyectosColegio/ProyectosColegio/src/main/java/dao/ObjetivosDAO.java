@@ -14,7 +14,6 @@ public class ObjetivosDAO {
             + " FROM objetivo o"
             + " INNER JOIN r_proyecto_linea r ON o.id_r_proyecto_linea = r.id";
 
-    // Todos los objetivos del proyecto (de todas sus lineas detalladas)
     public List<Objetivo> listarPorProyecto(int idProyecto) {
         List<Objetivo> lista = new ArrayList<>();
         String sql = SQL_BASE + " WHERE r.id_proyecto = ? ORDER BY o.orden, o.id";
@@ -48,7 +47,6 @@ public class ObjetivosDAO {
         return null;
     }
 
-    // El orden queda al final de los objetivos de esa linea detallada
     public boolean agregar(Objetivo o) {
         String sql = "INSERT INTO objetivo (nombre, alias, descripcion, orden, evidencias, logro, id_r_proyecto_linea)"
                    + " VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -90,7 +88,6 @@ public class ObjetivosDAO {
         }
     }
 
-    // Sus actividades se borran solas (ON DELETE CASCADE)
     public boolean eliminar(int id) {
         String sql = "DELETE FROM objetivo WHERE id = ?";
         try (Connection con = Conexion.getConexion();

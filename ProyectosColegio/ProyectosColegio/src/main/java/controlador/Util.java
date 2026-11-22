@@ -8,7 +8,6 @@ public final class Util {
     private Util() {
     }
 
-    // Convierte a int; si viene vacio o invalido devuelve -1
     public static int entero(String valor) {
         try {
             return Integer.parseInt(valor);
@@ -17,7 +16,6 @@ public final class Util {
         }
     }
 
-    // Texto vacio se guarda como null
     public static String texto(String valor) {
         if (valor == null || valor.trim().isEmpty()) {
             return null;
@@ -25,7 +23,6 @@ public final class Util {
         return valor.trim();
     }
 
-    // El input type="datetime-local" envia yyyy-MM-ddTHH:mm; vacio = sin fecha
     public static LocalDateTime fechaHora(String valor) throws DateTimeParseException {
         if (valor == null || valor.trim().isEmpty()) {
             return null;

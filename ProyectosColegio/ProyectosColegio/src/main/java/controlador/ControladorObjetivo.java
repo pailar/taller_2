@@ -81,8 +81,6 @@ public class ControladorObjetivo extends HttpServlet {
         }
     }
 
-    // Arma un Objetivo con lo del formulario (crear y editar usan casi los mismos campos).
-    // Devuelve null si falta algo obligatorio o un numero es invalido.
     private Objetivo armarObjetivo(HttpServletRequest request) {
         int idRelacion = Util.entero(request.getParameter("txtIdRelacion"));
         String nombre = Util.texto(request.getParameter("txtNombre"));
@@ -92,7 +90,6 @@ public class ControladorObjetivo extends HttpServlet {
             return null;
         }
 
-        // en "crear" estos campos no vienen: orden lo calcula el DAO y logro parte en 0
         String paramLogro = request.getParameter("txtLogro");
         int logro = (paramLogro == null) ? 0 : Util.entero(paramLogro);
         if (logro < 0 || logro > 100) {
