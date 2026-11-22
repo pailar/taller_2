@@ -1,55 +1,61 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.util.List"%>
 <%@page import="modelo.Proyecto"%>
+<%!
+    private String esc(String s) {
+        if (s == null) return "";
+        return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
+    }
+
+    private String fmt(LocalDate d) {
+        if (d == null) return "-";
+        return d.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Gestión de Proyectos</title>
+    <title>Proyectos</title>
 </head>
 <body>
-    <a href="menu.jsp">← Volver al Menú</a>
-    <h1>Proyectos</h1>
+    <b>PROYECTOS</b>
+    <br><br>
+
+    <% if (request.getParameter("ok") != null) { %>
+        <p><b>Operación realizada correctamente.</b></p>
+    <% } %>
+    <% if ("2".equals(request.getParameter("error"))) { %>
+        <p><b>La fecha de término no puede ser anterior a la fecha de inicio.</b></p>
+    <% } else if (request.getParameter("error") != null) { %>
+        <p><b>No se pudo completar la operación.</b></p>
+    <% } %>
 
     <%
-        Proyecto proyectoEditar = (Proyecto) request.getAttribute("proyectoEditar");
-        boolean editando = (proyectoEditar != null);
+        String buscar = (String) request.getAttribute("buscar");
     %>
-
-    <form action="ControladorProyecto" method="POST">
-        <input type="hidden" name="accion" value="<%= editando ? "actualizar" : "guardar" %>">
-        
-        <% if (editando) { %>
-            <input type="hidden" name="txtId" value="<%= proyectoEditar.getId() %>">
-        <% } %>
-
-        <div>
-            <label>Nombre del Proyecto:</label>
-            <input type="text" name="txtNombre" value="<%= editando ? proyectoEditar.getNombre() : "" %>" required>
-        </div>
-
-        <div>
-            <label>Funcionario Responsable:</label>
-            <select name="txtIdFuncionario" required>
-            </select>
-        </div>
-
-        <br>
-        <button type="submit"><%= editando ? "Actualizar" : "Guardar" %></button>
-        <% if (editando) { %>
-            <a href="ControladorProyecto?accion=listar">Cancelar</a>
-        <% } %>
+    <form action="ControladorProyecto" method="get">
+        <input type="hidden" name="accion" value="listar">
+        <b>Buscar:</b>
+        <input type="text" name="buscar" value="<%= esc(buscar) %>">
+        <input type="submit" value="Buscar">
     </form>
-
-    <hr>
+    <br>
 
     <table border="1" cellpadding="5" cellspacing="0">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
-                <th>Funcionario</th>
-                <th>Acciones</th>
+                <th>Descripción</th>
+                <th>Objetivo</th>
+                <th>Responsable</th>
+                <th>Fecha inicio</th>
+                <th>Fecha término</th>
+                <th>Editar</th>
+                <th>Quitar</th>
             </tr>
         </thead>
         <tbody>
@@ -59,12 +65,26 @@
                     for (Proyecto p : lista) {
             %>
                 <tr>
-                    <td><%= p.getId() %></td>
-                    <td><%= p.getNombre() %></td>
-                    <td><%= p.getFuncionario().getNombre() %></td>
+                    <td><b><%= p.getId() %></b></td>
+                    <td><b><%= esc(p.getNombre()) %></b></td>
+                    <td><%= esc(p.getDescripcion()) %></td>
+                    <td><%= esc(p.getObjetivo()) %></td>
+                    <td><%= esc(p.getFuncionario().getNombre()) %></td>
+                    <td><%= fmt(p.getFechaInicio()) %></td>
+                    <td><%= fmt(p.getFechaTermino()) %></td>
                     <td>
-                        <a href="ControladorProyecto?accion=editar&id=<%= p.getId() %>">Editar</a> | 
-                        <a href="ControladorProyecto?accion=eliminar&id=<%= p.getId() %>" onclick="return confirm('¿Eliminar este proyecto?');">Eliminar</a>
+                        <form action="ControladorProyecto" method="get">
+                            <input type="hidden" name="accion" value="editar">
+                            <input type="hidden" name="id" value="<%= p.getId() %>">
+                            <input type="submit" value="Editar">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="ControladorProyecto" method="get">
+                            <input type="hidden" name="accion" value="confirmarEliminar">
+                            <input type="hidden" name="id" value="<%= p.getId() %>">
+                            <input type="submit" value="Quitar">
+                        </form>
                     </td>
                 </tr>
             <%
@@ -73,5 +93,15 @@
             %>
         </tbody>
     </table>
+    <br>
+
+    <form action="ControladorProyecto" method="get">
+        <input type="hidden" name="accion" value="nuevo">
+        <input type="submit" value="Agregar Proyecto">
+    </form>
+
+    <form action="menu.jsp" method="get">
+        <input type="submit" value="Volver">
+    </form>
 </body>
 </html>

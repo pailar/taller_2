@@ -1,18 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
-/**
- *
- * @author usuario
- */
 public class Proyecto {
     private int id;
     private String nombre;
+    private String descripcion;
+    private String objetivo;
+    private LocalDate fechaInicio;
+    private LocalDate fechaTermino;
     private Funcionario funcionario = new Funcionario();
     private ArrayList<Linea> arLineas = new ArrayList();
 
@@ -30,6 +27,38 @@ public class Proyecto {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getObjetivo() {
+        return objetivo;
+    }
+
+    public void setObjetivo(String objetivo) {
+        this.objetivo = objetivo;
+    }
+
+    public LocalDate getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(LocalDate fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public LocalDate getFechaTermino() {
+        return fechaTermino;
+    }
+
+    public void setFechaTermino(LocalDate fechaTermino) {
+        this.fechaTermino = fechaTermino;
     }
 
     public Funcionario getFuncionario() {
@@ -50,12 +79,9 @@ public class Proyecto {
 
     @Override
     public String toString() {
-        return "Proyecto{" + "id=" + id + ", nombre=" + nombre + ", funcionario=" + funcionario + ", arLineas=" + arLineas + '}';
+        return "Proyecto{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion
+                + ", objetivo=" + objetivo + ", fechaInicio=" + fechaInicio
+                + ", fechaTermino=" + fechaTermino + ", funcionario=" + funcionario
+                + ", arLineas=" + arLineas + '}';
     }
-
-
-
-    
-    
-    
 }
