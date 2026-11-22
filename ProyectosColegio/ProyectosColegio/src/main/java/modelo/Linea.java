@@ -1,18 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author usuario
- */
 public class Linea {
     int id;
     String nombre;
+    int idRelacion;
+    String descripcion;
     ArrayList<Objetivo> arObjetivos = new ArrayList();
 
     public int getId() {
@@ -31,6 +25,22 @@ public class Linea {
         this.nombre = nombre;
     }
 
+    public int getIdRelacion() {
+        return idRelacion;
+    }
+
+    public void setIdRelacion(int idRelacion) {
+        this.idRelacion = idRelacion;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     public ArrayList<Objetivo> getArObjetivos() {
         return arObjetivos;
     }
@@ -41,10 +51,7 @@ public class Linea {
 
     @Override
     public String toString() {
-        return "Linea{" + "id=" + id + ", nombre=" + nombre + ", arObjetivos=" + arObjetivos + '}';
+        return "Linea{" + "id=" + id + ", nombre=" + nombre + ", idRelacion=" + idRelacion
+                + ", descripcion=" + descripcion + ", arObjetivos=" + arObjetivos + '}';
     }
-
-
-    
-    
 }

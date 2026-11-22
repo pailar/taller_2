@@ -1,20 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
 
 import java.time.LocalDateTime;
 
-/**
- *
- * @author usuario
- */
 public class Actividad {
     int id;
     String nombre;
+    String descripcion;
+    int idObjetivo;
+    String aliasObjetivo;
     LocalDateTime fechaHoraInicio;
     LocalDateTime fechaHoraTermino;
+    boolean pao;
+    int porcentaje;
+    String observacion;
+    Funcionario funcionario = new Funcionario();
 
     public int getId() {
         return id;
@@ -30,6 +29,30 @@ public class Actividad {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public int getIdObjetivo() {
+        return idObjetivo;
+    }
+
+    public void setIdObjetivo(int idObjetivo) {
+        this.idObjetivo = idObjetivo;
+    }
+
+    public String getAliasObjetivo() {
+        return aliasObjetivo;
+    }
+
+    public void setAliasObjetivo(String aliasObjetivo) {
+        this.aliasObjetivo = aliasObjetivo;
     }
 
     public LocalDateTime getFechaHoraInicio() {
@@ -48,11 +71,43 @@ public class Actividad {
         this.fechaHoraTermino = fechaHoraTermino;
     }
 
+    public boolean isPao() {
+        return pao;
+    }
+
+    public void setPao(boolean pao) {
+        this.pao = pao;
+    }
+
+    public int getPorcentaje() {
+        return porcentaje;
+    }
+
+    public void setPorcentaje(int porcentaje) {
+        this.porcentaje = porcentaje;
+    }
+
+    public String getObservacion() {
+        return observacion;
+    }
+
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
     @Override
     public String toString() {
-        return "Actividad{" + "id=" + id + ", nombre=" + nombre + ", fechaHoraInicio=" + fechaHoraInicio + ", fechaHoraTermino=" + fechaHoraTermino + '}';
+        return "Actividad{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion
+                + ", idObjetivo=" + idObjetivo + ", fechaHoraInicio=" + fechaHoraInicio
+                + ", fechaHoraTermino=" + fechaHoraTermino + ", pao=" + pao
+                + ", porcentaje=" + porcentaje + ", funcionario=" + funcionario + '}';
     }
-    
-    
-    
 }
