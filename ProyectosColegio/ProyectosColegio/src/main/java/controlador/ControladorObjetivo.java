@@ -1,6 +1,5 @@
 package controlador;
 
-import dao.LineasDAO;
 import dao.ObjetivosDAO;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -14,7 +13,6 @@ import modelo.Objetivo;
 public class ControladorObjetivo extends HttpServlet {
 
     private ObjetivosDAO dao = new ObjetivosDAO();
-    private LineasDAO lineasDAO = new LineasDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -32,8 +30,19 @@ public class ControladorObjetivo extends HttpServlet {
 
         switch (accion) {
             case "crear":
-                Objetivo nuevo = armarObjetivo(request);
-                if (nuevo != null && dao.agregar(nuevo)) {
+                int idRelacion = Util.entero(request.getParameter("txtIdRelacion"));
+                String nombre = Util.texto(request.getParameter("txtNombre"));
+                String alias = Util.texto(request.getParameter("txtAlias"));
+                if (idRelacion < 0 || nombre == null || alias == null) {
+                    volver(response, idProyecto, "&error=1");
+                    break;
+                }
+                Objetivo nuevo = new Objetivo();
+                nuevo.setIdRelacion(idRelacion);
+                nuevo.setNombre(nombre);
+                nuevo.setAlias(alias);
+                nuevo.setDescripcion(Util.texto(request.getParameter("txtDescripcion")));
+                if (dao.agregar(nuevo)) {
                     volver(response, idProyecto, "&ok=1");
                 } else {
                     volver(response, idProyecto, "&error=1");
@@ -48,18 +57,22 @@ public class ControladorObjetivo extends HttpServlet {
                 }
                 request.setAttribute("idProyecto", idProyecto);
                 request.setAttribute("objetivoEditar", objetivoEditar);
-                request.setAttribute("lineasProyecto", lineasDAO.listarPorProyecto(idProyecto, null));
                 request.getRequestDispatcher("EditarObjetivo.jsp").forward(request, response);
                 break;
 
             case "actualizar":
-                Objetivo objetivoAct = armarObjetivo(request);
-                int idObjetivoAct = Util.entero(request.getParameter("idObjetivo"));
-                if (objetivoAct == null || idObjetivoAct < 0) {
+                // Se carga el objetivo y solo se cambian nombre, alias y descripcion;
+                // orden, logro, evidencias y linea quedan como estaban
+                Objetivo objetivoAct = dao.obtenerPorId(Util.entero(request.getParameter("idObjetivo")));
+                String nombreAct = Util.texto(request.getParameter("txtNombre"));
+                String aliasAct = Util.texto(request.getParameter("txtAlias"));
+                if (objetivoAct == null || nombreAct == null || aliasAct == null) {
                     volver(response, idProyecto, "&error=1");
                     break;
                 }
-                objetivoAct.setId(idObjetivoAct);
+                objetivoAct.setNombre(nombreAct);
+                objetivoAct.setAlias(aliasAct);
+                objetivoAct.setDescripcion(Util.texto(request.getParameter("txtDescripcion")));
                 if (dao.actualizar(objetivoAct)) {
                     volver(response, idProyecto, "&ok=1");
                 } else {
@@ -79,38 +92,6 @@ public class ControladorObjetivo extends HttpServlet {
                 volver(response, idProyecto, "");
                 break;
         }
-    }
-
-    private Objetivo armarObjetivo(HttpServletRequest request) {
-        int idRelacion = Util.entero(request.getParameter("txtIdRelacion"));
-        String nombre = Util.texto(request.getParameter("txtNombre"));
-        String alias = Util.texto(request.getParameter("txtAlias"));
-
-        if (idRelacion < 0 || nombre == null || alias == null) {
-            return null;
-        }
-
-        String paramLogro = request.getParameter("txtLogro");
-        int logro = (paramLogro == null) ? 0 : Util.entero(paramLogro);
-        if (logro < 0 || logro > 100) {
-            return null;
-        }
-
-        String paramOrden = request.getParameter("txtOrden");
-        int orden = (paramOrden == null) ? 1 : Util.entero(paramOrden);
-        if (orden < 1) {
-            return null;
-        }
-
-        Objetivo o = new Objetivo();
-        o.setIdRelacion(idRelacion);
-        o.setNombre(nombre);
-        o.setAlias(alias);
-        o.setDescripcion(Util.texto(request.getParameter("txtDescripcion")));
-        o.setEvidencias(Util.texto(request.getParameter("txtEvidencias")));
-        o.setLogro(logro);
-        o.setOrden(orden);
-        return o;
     }
 
     private void volver(HttpServletResponse response, int idProyecto, String resultado) throws IOException {
