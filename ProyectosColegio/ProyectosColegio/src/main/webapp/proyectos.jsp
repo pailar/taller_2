@@ -15,90 +15,91 @@
     }
 %>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Proyectos</title>
+    <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
-    <b>PROYECTOS</b>
-    <br><br>
+    <h1>Proyectos</h1>
+    <p class="sub">Busca, agrega, edita o quita proyectos.</p>
 
     <% if (request.getParameter("ok") != null) { %>
-        <p><b>Operación realizada correctamente.</b></p>
+        <div class="msg ok">Operación realizada correctamente.</div>
     <% } %>
     <% if ("2".equals(request.getParameter("error"))) { %>
-        <p><b>La fecha de término no puede ser anterior a la fecha de inicio.</b></p>
+        <div class="msg error">La fecha de término no puede ser anterior a la fecha de inicio.</div>
     <% } else if (request.getParameter("error") != null) { %>
-        <p><b>No se pudo completar la operación.</b></p>
+        <div class="msg error">No se pudo completar la operación.</div>
     <% } %>
 
     <%
         String buscar = (String) request.getAttribute("buscar");
+        List<Proyecto> lista = (List<Proyecto>) request.getAttribute("proyectos");
     %>
-    <form action="ControladorProyecto" method="get">
-        <input type="hidden" name="accion" value="listar">
-        <b>Buscar:</b>
-        <input type="text" name="buscar" value="<%= esc(buscar) %>">
-        <input type="submit" value="Buscar">
-    </form>
-    <br>
 
-    <table border="1" cellpadding="5" cellspacing="0">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Objetivo</th>
-                <th>Responsable</th>
-                <th>Fecha inicio</th>
-                <th>Fecha término</th>
-                <th>Editar</th>
-                <th>Quitar</th>
-            </tr>
-        </thead>
-        <tbody>
-            <%
-                List<Proyecto> lista = (List<Proyecto>) request.getAttribute("proyectos");
-                if (lista != null) {
-                    for (Proyecto p : lista) {
-            %>
+    <div class="barra">
+        <form action="ControladorProyecto" method="get" class="buscador">
+            <input type="hidden" name="accion" value="listar">
+            <input type="text" name="buscar" placeholder="Buscar por nombre" value="<%= esc(buscar) %>">
+            <input type="submit" value="Buscar">
+        </form>
+
+        <form action="ControladorProyecto" method="get">
+            <input type="hidden" name="accion" value="nuevo">
+            <input type="submit" value="Agregar Proyecto">
+        </form>
+    </div>
+
+    <div class="scroll">
+        <table class="tabla-ancha">
+            <thead>
                 <tr>
-                    <td><b><%= p.getId() %></b></td>
-                    <td><b><%= esc(p.getNombre()) %></b></td>
-                    <td><%= esc(p.getDescripcion()) %></td>
-                    <td><%= esc(p.getObjetivo()) %></td>
-                    <td><%= esc(p.getFuncionario().getNombre()) %></td>
-                    <td><%= fmt(p.getFechaInicio()) %></td>
-                    <td><%= fmt(p.getFechaTermino()) %></td>
-                    <td>
-                        <form action="ControladorProyecto" method="get">
-                            <input type="hidden" name="accion" value="editar">
-                            <input type="hidden" name="id" value="<%= p.getId() %>">
-                            <input type="submit" value="Editar">
-                        </form>
-                    </td>
-                    <td>
-                        <form action="ControladorProyecto" method="get">
-                            <input type="hidden" name="accion" value="confirmarEliminar">
-                            <input type="hidden" name="id" value="<%= p.getId() %>">
-                            <input type="submit" value="Quitar">
-                        </form>
-                    </td>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Objetivo</th>
+                    <th>Responsable</th>
+                    <th>Fecha inicio</th>
+                    <th>Fecha término</th>
+                    <th>Acciones</th>
                 </tr>
-            <%
-                    }
-                }
-            %>
-        </tbody>
-    </table>
-    <br>
-
-    <form action="ControladorProyecto" method="get">
-        <input type="hidden" name="accion" value="nuevo">
-        <input type="submit" value="Agregar Proyecto">
-    </form>
+            </thead>
+            <tbody>
+                <% if (lista == null || lista.isEmpty()) { %>
+                    <tr>
+                        <td colspan="8" class="vacio">No hay proyectos para mostrar.</td>
+                    </tr>
+                <% } else {
+                       for (Proyecto p : lista) { %>
+                    <tr>
+                        <td><b><%= p.getId() %></b></td>
+                        <td><b><%= esc(p.getNombre()) %></b></td>
+                        <td><%= esc(p.getDescripcion()) %></td>
+                        <td><%= esc(p.getObjetivo()) %></td>
+                        <td><%= esc(p.getFuncionario().getNombre()) %></td>
+                        <td><%= fmt(p.getFechaInicio()) %></td>
+                        <td><%= fmt(p.getFechaTermino()) %></td>
+                        <td>
+                            <form action="ControladorProyecto" method="get">
+                                <input type="hidden" name="accion" value="editar">
+                                <input type="hidden" name="id" value="<%= p.getId() %>">
+                                <input type="submit" value="Editar">
+                            </form>
+                            <form action="ControladorProyecto" method="get">
+                                <input type="hidden" name="accion" value="confirmarEliminar">
+                                <input type="hidden" name="id" value="<%= p.getId() %>">
+                                <input type="submit" value="Quitar" class="rojo">
+                            </form>
+                        </td>
+                    </tr>
+                <%     }
+                   } %>
+            </tbody>
+        </table>
+    </div>
 
     <form action="menu.jsp" method="get">
         <input type="submit" value="Volver">

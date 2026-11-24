@@ -13,6 +13,7 @@ dao\UsuarioDAOImpl.class
 conexion\Conexion.class
 dao\ActividadesDAO.class
 controlador\Controlador.class
+controlador\FiltroSesion.class
 servicios\iFactoria.class
 db\ConexionSqlite3.class
 dao\ObjetivosDAO.class

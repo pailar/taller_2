@@ -10,6 +10,7 @@
 %>
 <!DOCTYPE html>
 <html>
+        <link rel="stylesheet" href="css/estilo.css">
 <head>
     <meta charset="UTF-8">
     <title>Crear Actividad</title>

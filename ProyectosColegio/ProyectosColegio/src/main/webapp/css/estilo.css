@@ -1,0 +1,316 @@
+:root {
+    --negro: #000;
+    --azul: #1f5fd6;
+    --azul-oscuro: #17489f;
+    --rojo: #d32f2f;
+    --rojo-oscuro: #a52222;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 28px 20px 48px 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    color: var(--negro);
+    background: #fff;
+}
+
+h1 {
+    margin: 0 0 6px 0;
+    font-size: 28px;
+}
+
+h2 {
+    margin: 0 0 16px 0;
+    padding-bottom: 8px;
+    font-size: 18px;
+    border-bottom: 2px solid var(--negro);
+}
+
+h3 {
+    margin: 24px 0 6px 0;
+    font-size: 16px;
+}
+
+big {
+    font-size: 24px;
+}
+
+p {
+    line-height: 1.5;
+}
+
+hr {
+    margin: 26px 0;
+    border: 0;
+    border-top: 1px solid var(--negro);
+}
+
+.sub {
+    margin: 0 0 22px 0;
+    font-size: 14px;
+}
+
+/* ---------- Botones ---------- */
+
+input[type="submit"],
+button,
+a.btn {
+    --color: var(--azul);
+    --color-hover: var(--azul-oscuro);
+    display: inline-block;
+    padding: 8px 18px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background: var(--color);
+    border: 1px solid var(--color);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover,
+button:hover,
+a.btn:hover {
+    background: var(--color-hover);
+    border-color: var(--color-hover);
+}
+
+/* boton rojo (eliminar). Tambien se pone rojo solo por su texto */
+input.rojo,
+button.rojo,
+input[type="submit"][value="Borrar"],
+input[type="submit"][value="Quitar"],
+input[type="submit"][value="Eliminar"],
+input[type="submit"][value$="Sí, quitar"] {
+    --color: var(--rojo);
+    --color-hover: var(--rojo-oscuro);
+}
+
+/* boton con borde (fondo blanco) */
+input.contorno,
+button.contorno,
+a.contorno {
+    color: var(--color);
+    background: #fff;
+}
+
+input.contorno:hover,
+button.contorno:hover,
+a.contorno:hover {
+    color: #fff;
+    background: var(--color);
+    border-color: var(--color);
+}
+
+.btn-ancho {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 11px;
+    font-size: 15px;
+}
+
+/* ---------- Campos de formulario ---------- */
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="number"],
+select,
+textarea {
+    padding: 8px 10px;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--negro);
+    background: #fff;
+    border: 1px solid var(--negro);
+    border-radius: 5px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid var(--azul);
+    outline-offset: 1px;
+}
+
+form {
+    margin: 8px 0;
+}
+
+.formulario label {
+    display: block;
+    margin: 14px 0 4px 0;
+    font-weight: bold;
+}
+
+.formulario input[type="text"],
+.formulario textarea {
+    width: 100%;
+    max-width: 640px;
+}
+
+.formulario select {
+    max-width: 100%;
+}
+
+.formulario input[type="submit"] {
+    display: block;
+    margin-top: 16px;
+}
+
+.contador {
+    display: block;
+    margin-top: 4px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* ---------- Tablas ---------- */
+
+table {
+    margin: 10px 0 16px 0;
+    border-collapse: collapse;
+    border: 2px solid var(--negro);
+}
+
+th,
+td {
+    padding: 9px 14px;
+    text-align: left;
+    vertical-align: middle;
+    border: 1px solid var(--negro);
+}
+
+th {
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--negro);
+}
+
+td form {
+    display: inline-block;
+    margin: 2px 6px 2px 0;
+}
+
+.tabla-ancha {
+    width: 100%;
+}
+
+.scroll {
+    overflow-x: auto;
+}
+
+.vacio {
+    font-style: italic;
+    text-align: center;
+}
+
+/* tabla de datos tipo ficha (etiqueta | campo) */
+.form-tabla td:first-child {
+    width: 220px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.form-tabla input[type="text"],
+.form-tabla textarea {
+    width: 100%;
+    min-width: 280px;
+}
+
+/* ---------- Estructura ---------- */
+
+.barra {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 14px 0;
+}
+
+.barra form,
+.barra h1 {
+    margin: 0;
+}
+
+.buscador input[type="text"] {
+    min-width: 260px;
+}
+
+.seccion {
+    margin: 24px 0;
+    padding: 22px;
+    border: 1px solid var(--negro);
+    border-radius: 8px;
+}
+
+/* ---------- Mensajes ---------- */
+
+.msg {
+    margin: 14px 0;
+    padding: 10px 14px;
+    font-weight: bold;
+    border: 1px solid var(--negro);
+    border-radius: 5px;
+}
+
+.msg.ok {
+    color: var(--azul);
+    border-color: var(--azul);
+}
+
+.msg.error {
+    color: var(--rojo);
+    border-color: var(--rojo);
+}
+
+/* ---------- Pantallas centradas (login y bienvenida) ---------- */
+
+body.centrado {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    max-width: none;
+    padding: 24px;
+}
+
+.tarjeta {
+    width: 100%;
+    max-width: 380px;
+    padding: 34px 30px;
+    border: 2px solid var(--negro);
+    border-radius: 10px;
+}
+
+.tarjeta h1,
+.tarjeta .sub {
+    text-align: center;
+}
+
+.tarjeta label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.tarjeta input[type="text"],
+.tarjeta input[type="password"] {
+    width: 100%;
+    margin: 5px 0 16px 0;
+    padding: 10px;
+}
