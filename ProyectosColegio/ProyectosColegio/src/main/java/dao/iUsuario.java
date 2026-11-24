@@ -2,9 +2,8 @@ package dao;
 
 import modelo.Usuario;
 
-public interface UsuarioDAO {
+public interface iUsuario {
 
     Usuario validar(String login, String pass);
 
-    Usuario buscarPorLogin(String login);
 }

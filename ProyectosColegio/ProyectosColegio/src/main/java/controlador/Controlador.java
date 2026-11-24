@@ -1,6 +1,5 @@
 package controlador;
 
-import dao.UsuarioDAO;
 import factoria.DAOFactory;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,11 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import modelo.Usuario;
+import dao.iUsuario;
 
 @WebServlet(name = "Controlador", urlPatterns = {"/controlador"})
 public class Controlador extends HttpServlet {
 
-    private final UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();
+    private final iUsuario usuarioDAO = DAOFactory.getUsuarioDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

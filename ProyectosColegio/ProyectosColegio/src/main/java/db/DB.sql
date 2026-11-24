@@ -133,4 +133,6 @@ password varchar(10),
 primary key (login)
 );
 
-insert into usuario values ('unsuario', 'mipassword');
+insert into usuario values ('leo', '1234');
+insert into usuario values ('matias', '1234');
+insert into usuario values ('danae', '1234');

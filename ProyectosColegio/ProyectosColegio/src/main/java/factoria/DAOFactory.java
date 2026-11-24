@@ -1,14 +1,14 @@
 package factoria;
 
-import dao.UsuarioDAO;
 import dao.UsuarioDAOImpl;
+import dao.iUsuario;
 
 public class DAOFactory {
 
     private DAOFactory() {
     }
 
-    public static UsuarioDAO getUsuarioDAO() {
+    public static iUsuario getUsuarioDAO() {
         return new UsuarioDAOImpl();
     }
 }

@@ -7,45 +7,39 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import modelo.Usuario;
 
-public class UsuarioDAOImpl implements UsuarioDAO {
+public class UsuarioDAOImpl implements iUsuario {
 
+    //uDAO.validar(String login, String pass)
     @Override
     public Usuario validar(String login, String pass) {
-        String sql = "SELECT id, nombre, login, pass FROM usuario WHERE login = ? AND pass = ?";
-        try (Connection con = Conexion.getConexion();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+        String sql = "SELECT id, nombre, login, password FROM usuario WHERE login = ? AND pass = ?";
+        try
+        {
+            Connection con = Conexion.getConexion();
+        
+            PreparedStatement ps = con.prepareStatement(sql);
+            
             ps.setString(1, login);
             ps.setString(2, pass);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return leer(rs);
-                }
+            
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Usuario unUsuario = new Usuario();
+                unUsuario.setLogin(rs.getString("login"));
+                unUsuario.setPassword(rs.getString("password"));
+                return unUsuario;
             }
+            else
+            {
+                //no encontramos un usuario con esta combinatoria de login pasword en la base de datos
+                //return null;
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    @Override
-    public Usuario buscarPorLogin(String login) {
-        String sql = "SELECT id, nombre, login, pass FROM usuario WHERE login = ?";
-        try (Connection con = Conexion.getConexion();
-             PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, login);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return leer(rs);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private Usuario leer(ResultSet rs) throws SQLException {
-
-        return null;
-    }
+    
 }
