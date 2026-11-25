@@ -13,6 +13,8 @@ public class IniciadorServicios implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         System.out.println("--- INICIALIZANDO TABLAS DE MASCOTAS ---");
+        
+        FactoriaServiciosImpl.getFactoria().setMotor("mysql");
 /*
         String[] comandosSQL = {
             "DROP TABLE IF EXISTS MASCOTA",
